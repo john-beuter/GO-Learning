@@ -16,4 +16,6 @@ func main() {
 		links := e.ChildAttr("a", "href")
 		fmt.Println(links)
 	})
+
+	c.Visit("https://en.wikipedia.org/wiki/Dune_(franchise)")
 }
