@@ -13,9 +13,10 @@ func main() {
 
 	//Scraping HTML
 	c.OnHTML(".mw-parser-output", func(e *colly.HTMLElement) {
-		links := e.ChildAttr("a", "href")
-		fmt.Println(links)
+		links := e.ChildAttrs("a", "href")
+		fmt.Println(links[0]) //Gets the first element
+		print("\n")
 	})
 
-	c.Visit("https://en.wikipedia.org/wiki/Dune_(franchise)")
+	c.Visit("https://en.wikipedia.org/wiki/Web_scraping")
 }
