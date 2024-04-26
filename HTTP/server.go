@@ -17,6 +17,8 @@ func getHello(w http.ResponseWriter, r *http.Request) {
 	io.WriteString(w, "Hello, HTTP!\n")
 }
 
+//Revising the code a little here
+
 func main() {
 	http.HandleFunc("/", getRoot)
 	http.HandleFunc("/hello", getHello)
