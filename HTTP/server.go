@@ -20,6 +20,7 @@ func getHello(w http.ResponseWriter, r *http.Request) {
 //Revising the code a little here
 
 func main() {
+	
 	http.HandleFunc("/", getRoot)
 	http.HandleFunc("/hello", getHello)
 
