@@ -9,6 +9,7 @@ import(
   "io"
   "log"
   "os"
+  "strconv"
 )
 
 func main() {
@@ -32,8 +33,22 @@ func main() {
        log.Fatal(err)
     }
     
-    fmt.Println("%v", rec[0])
+    var userAnswer int
+
+    fmt.Println(rec[0])
     fmt.Println("Enter you answer: ")
+    fmt.Scanln(&userAnswer)
+
+    solution, err := strconv.Atoi(rec[1])
+
+    if err != nil{
+      log.Fatal(err)
+    }
+    if userAnswer == solution{
+      fmt.Println("success!")
+    }
+    
+
 
     //Need to add a reading to get the users input
     ///then compare that input ot rec[1] if it matches have points
