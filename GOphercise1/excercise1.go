@@ -36,7 +36,7 @@ func main() {
     fmt.Println("Enter you answer: ")
 
     //Need to add a reading to get the users input
-    //then compare that input ot rec[1] if it matches have points
+    ///then compare that input ot rec[1] if it matches have points
 
 
   }
