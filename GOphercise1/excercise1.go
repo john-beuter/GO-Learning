@@ -10,6 +10,7 @@ import(
   "log"
   "os"
   "strconv"
+  "time"
 )
 
 func main() {
@@ -25,6 +26,7 @@ func main() {
   csvReader := csv.NewReader(f)
   for{
     rec, err := csvReader.Read()
+    
     if err == io.EOF{
       break
     }
@@ -37,8 +39,15 @@ func main() {
 
     fmt.Println(rec[0])
     fmt.Println("Enter you answer: ")
-    fmt.Scanln(&userAnswer)
+    
+    timer2 := time.NewTimer(5 * time.Second)
+    go func() {
+      <-timer2.C
+      fmt.Println("Times up!")
+      os.Exit(0)
+    }()
 
+    fmt.Scanln(&userAnswer)
     solution, err := strconv.Atoi(rec[1])
 
     if err != nil{
@@ -46,6 +55,10 @@ func main() {
     }
     if userAnswer == solution{
       fmt.Println("success!")
+      timer2.Stop()
+    }else{
+      fmt.Println("incorrect :(")
+      os.Exit(0)
     }
     
 
