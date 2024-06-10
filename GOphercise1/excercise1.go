@@ -1,73 +1,67 @@
 package main
 
-
 //Need to read in values from a CSV and make it a game.
 
-import(
-  "encoding/csv" 
-  "fmt"
-  "io"
-  "log"
-  "os"
-  "strconv"
-  "time"
+import (
+	"encoding/csv"
+	"fmt"
+	"io"
+	"log"
+	"os"
+	"strconv"
+	"time"
 )
 
 func main() {
 
-  f, err := os.Open("problems.csv")
-  if err != nil{
-    log.Fatal(err)
-  }
+	f, err := os.Open("problems.csv")
+	if err != nil {
+		log.Fatal(err)
+	}
 
+	defer f.Close()
 
-  defer f.Close()
+	csvReader := csv.NewReader(f)
+	for {
+		rec, err := csvReader.Read()
 
-  csvReader := csv.NewReader(f)
-  for{
-    rec, err := csvReader.Read()
-    
-    if err == io.EOF{
-      break
-    }
+		if err == io.EOF {
+			break
+		}
 
-    if err != nil{
-       log.Fatal(err)
-    }
-    
-    var userAnswer int
+		if err != nil {
+			log.Fatal(err)
+		}
 
-    fmt.Println(rec[0])
-    fmt.Println("Enter you answer: ")
-    
-    timer2 := time.NewTimer(5 * time.Second)
-    go func() {
-      <-timer2.C
-      fmt.Println("Times up!")
-      os.Exit(0)
-    }()
+		var userAnswer int
 
-    fmt.Scanln(&userAnswer)
-    solution, err := strconv.Atoi(rec[1])
+		fmt.Println(rec[0])
+		fmt.Println("Enter you answer: ")
 
-    if err != nil{
-      log.Fatal(err)
-    }
-    if userAnswer == solution{
-      fmt.Println("success!")
-      timer2.Stop()
-    }else{
-      fmt.Println("incorrect :(")
-      os.Exit(0)
-    }
-    
+		timer2 := time.NewTimer(5 * time.Second)
+		go func() {
+			<-timer2.C
+			fmt.Println("Times up!")
+			os.Exit(0)
+		}()
 
+		fmt.Scanln(&userAnswer)
+		solution, err := strconv.Atoi(rec[1])
 
-    //Need to add a reading to get the users input
-    ///then compare that input ot rec[1] if it matches have points
+		if err != nil {
+			log.Fatal(err)
+		}
+		if userAnswer == solution {
+			fmt.Println("success!")
+			timer2.Stop()
+		} else {
+			fmt.Println("incorrect :(")
+			os.Exit(0)
+		}
 
+		//Need to add a reading to get the users input
+		///then compare that input ot rec[1] if it matches have points
 
-  }
-
+	}
 
 }
